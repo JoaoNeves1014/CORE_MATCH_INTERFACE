@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja</title>
+    <title>Loja - Core Store</title>
     <link rel="stylesheet" href="../css/store.css">
 </head>
 <body>
-
-
 
     <header class="navbar">
         <div class="logo">
@@ -17,7 +15,7 @@
             </a>
         </div>
     
-        <h1 Style="color: #00A19B"(255, 0, 0);>Core Store</h1>
+        <h1 style="color: #00A19B;">Core Store</h1>
         
         <nav>
             <ul class="nav-links">
@@ -29,7 +27,6 @@
             </ul>
         </nav>
 
-
         <div class="search-container">
             <input type="text" placeholder="Pesquisar...">
             <button type="submit">Buscar</button>
@@ -39,37 +36,36 @@
             <a href="../html/login.html" class="btn-login">Login</a>
             <a href="../html/cadastro.html" class="btn-register">Cadastrar</a>
         </div>
-    </div>
     </header>
 
     <main class="container">
         <section class="content-section section-amd">
             <h2>AMD</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card" data-desc="Processador de codinome Cezanne com gráficos integrados Radeon Vega 7. Ideal para setups de entrada e alta performance competitiva em jogos leves." data-specs="Frequência: 3.6GHz (4.4GHz Turbo) | Núcleos: 6 | Threads: 12 | Cache: 16MB | Socket: AM4">
                     <div class="card-image"><img src="../img/Ryzen 5 5600GT.png" alt="AMD Ryzen 5 5600GT"></div>
                     <div class="card-info">
                         <h3>AMD Ryzen 5 5600GT</h3>
                         <p class="price">R$879.00</p>
-                        <a href=""><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="O rei absoluto dos jogos. Equipado com a tecnologia 3D V-Cache que empilha memória cache verticalmente para maximizar as taxas de quadros (FPS)." data-specs="Frequência: 4.2GHz (5.0GHz Turbo) | Núcleos: 8 | Threads: 16 | Cache: 96MB 3D V-Cache | Socket: AM5">
                     <div class="card-image"><img src="../img/Ryzen 7 7800X3D.png" alt="Ryzen 7"></div>
                     <div class="card-info">
                         <h3>AMD Ryzen 7 7800X3D</h3>
                         <p class="price">R$2,220.00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="A força bruta máxima da arquitetura Zen 5 com tecnologia 3D V-Cache. Voltado para entusiastas extremos, streamers e criadores de conteúdo pesado." data-specs="Frequência: 4.3GHz (5.7GHz Turbo) | Núcleos: 16 | Threads: 32 | Cache: 128MB 3D V-Cache | Socket: AM5">
                     <div class="card-image"><img src="../img/Ryzen 9 9950X3D.png" alt="Ryzen 9"></div>
                     <div class="card-info">
                         <h3>AMD Ryzen 9 9950X3D</h3>
                         <p class="price">R$3,190.00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
             </div>
@@ -78,247 +74,177 @@
         <section class="content-section section-intel">
             <h2>Intel</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card" data-desc="Excelente custo-benefício da 14ª geração. Arquitetura híbrida focada em eficiência térmica e processamento inteligente para multitarefas e jogos modernos." data-specs="Frequência Base: 2.5GHz (4.7GHz Turbo) | Núcleos: 14 (6 P-cores + 8 E-cores) | Threads: 20 | Cache: 24MB | Socket: LGA1700">
                     <div class="card-image"><img src="../img/Intel Core i5 14.png" alt="Intel 5"></div>
                     <div class="card-info">
                         <h3>Intel Core i5 14600F</h3>
                         <p class="price">R$1,599.00</p>
-                         <a href="/html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="Desempenho de ponta projetado para rodar os títulos AAA mais exigentes no máximo, sem quedas de performance enquanto gerencia aplicativos em segundo plano." data-specs="Frequência Base: 3.4GHz (5.4GHz Turbo) | Núcleos: 20 (8 P-cores + 12 E-cores) | Threads: 28 | Cache: 33MB | Socket: LGA1700">
                     <div class="card-image"><img src="../img/Intel core i7.webp" alt="Intel 7"></div>
                     <div class="card-info">
                         <h3>Intel Core i7 14700F</h3>
                         <p class="price">R$2,600.00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="O topo de linha da Intel. Desempenho sem precedentes para computação pesada, renderização 3D profissional e o máximo que a tecnologia híbrida pode entregar." data-specs="Frequência Base: 3.2GHz (5.8GHz Turbo) | Núcleos: 24 (8 P-cores + 16 E-cores) | Threads: 32 | Cache: 36MB | Socket: LGA1700">
                     <div class="card-image"><img src="../img/Core i9.png" alt="intel 9"></div>
                     <div class="card-info">
                         <h3>Intel Core i9 14900F</h3>
                         <p class="price">R$3,680.00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="content-section section-PLCMAE">
+        <section class="content-section section-PLCMAE">
             <h2>Placas Mães</h2>
             <div class="card-grid">
-                <div class="card">
+                <div class="card" data-desc="Placa-mãe confiável com dissipadores robustos no VRM e conectividade sem fio integrada. Perfeita para processadores AMD Ryzen de socket AM4." data-specs="Chipset: AMD B550 | Formato: mATX | Suporte de Memória: DDR4 até 4400MHz | Conectividade: Wi-Fi AC e Bluetooth 4.2">
                     <div class="card-image"><img src="../img/placa-mae-msi-b550m-pro-vdh-wifi-amd-am4-matx_1594996441_gg-removebg-preview.png" alt="B550"></div>
                     <div class="card-info">
                         <h3>MSI B550M Pro-VDH WiFi</h3>
                         <p class="price">R$789.90</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="Durabilidade de nível militar com os mais recentes recursos para a plataforma AM5 da AMD. Pronta para suportar memórias DDR5 ultra velozes e PCIe 5.0." data-specs="Chipset: AMD B650 | Formato: ATX | Suporte de Memória: DDR5 até 7600MHz | Conectividade: Wi-Fi 6E e Bluetooth 5.2">
                     <div class="card-image"><img src="../img/placamaeB650PLUS.png" alt="Placa B650-PLUS"></div>
                     <div class="card-info">
                         <h3>ASUS TUF Gaming B650-Plus Wi-Fi</h3>
                         <p class="price">R$1,679.99</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/Core i9.png" alt="intel 9"></div>
-                    <div class="card-info">
-                        <h3>Intel Core i9 14900F</h3>
-                        <p class="price">R$3,680.00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </section>
 
         <section class="content-section section-perifericos">
             <h2>Perifericos</h2>
-                <div class="card-grid">
-                    <div class="card">
+            <div class="card-grid">
+                <div class="card" data-desc="Teclado mecânico compacto de layout 75%. Conta com switches pré-lubrificados de fábrica e construção com isolamento acústico premium." data-specs="Layout: ANSI compacto (75%) | Switches: Lineares customizados | Iluminação: RGB Dinâmico | Conexão: Cabo Removível Type-C">
                     <div class="card-image"><img src="../img/Ajazz-AK820-Teclado.png" alt="AK820"></div>
                     <div class="card-info">
                         <h3>Teclado Attack Shark x Ajazz AK820</h3>
                         <p class="price">R$363,33</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="O teclado mecânico gamer mais vendido do Brasil em sua versão tricolor estilizada. Layout TKL focado em poupar espaço para movimentação do mouse." data-specs="Layout: ABNT2 (TKL) | Switches: Outemu Blue/Red | Iluminação: Rainbow | Estrutura: Plástico ABS e Metal">
                     <div class="card-image"><img src="../img/RedKumara.webp" alt="Kumara"></div>
                     <div class="card-info">
                         <h3>Teclado Redragon Kumara Tricolor</h3>
                         <p class="price">R$275,90</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="Mouse ultraleve de alta performance equipado com sensor topo de linha e uma base de carregamento magnética com display embutido." data-specs="Sensor: PixArt PAW3395 | Peso: 49g | DPI Máximo: 26.000 | Conexão: Wireless 2.4GHz / Bluetooth / Cabo">
                     <div class="card-image"><img src="../img/AtkShrkX11.webp" alt="X11"></div>
                     <div class="card-info">
                         <h3>Mouse Attack Shark X11 WHITE</h3>
                         <p class="price">R$135,60</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/LogitechG435.png" alt="G435"></div>
-                    <div class="card-info">
-                        <h3>Headset Logitech G435 Sem Fio</h3>
-                        <p class="price">R$435,00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/FIFINE-H6.avif" alt=""></div>
-                    <div class="card-info">
-                        <h3>Headset Fifine H6</h3>
-                        <p class="price">R$275,00</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/FIFINE-AM8.webp" alt="am8"></div>
-                    <div class="card-info">
-                        <h3>Microphone Fifine am8</h3>
-                        <p class="price">R$349,90</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/logitechg203.png" alt="G203"></div>
-                    <div class="card-info">
-                        <h3>Mouse Logitehc G203</h3>
-                        <p class="price">R$91,90</p>
-                         <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/AULAF75.webp" alt=""></div>
-                    <div class="card-info">
-                        <h3>Teclado Aula F75 Cedar Green</h3>
-                        <p class="price">R$395,89</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/RazerDeathAdder.webp" alt="DeathAdder"></div>
-                    <div class="card-info">
-                        <h3>Mouse Razer DeathAdder</h3>
-                        <p class="price">R$160,00</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
+            </div>
         </section>
 
         <section class="content-section section-nvidia">
             <h2>GPUs Nvidia</h2>
-                <div class="card-grid">
-                    <div class="card">
+            <div class="card-grid">
+                <div class="card" data-desc="Excelente placa para jogar em 1080p ou 1440p com tudo no talo. Conta com a tecnologia exclusiva DLSS 3 e Frame Generation para multiplicar a taxa de quadros." data-specs="Memória VRAM: 16GB GDDR6 | Interface: 128-bit | Barramento: PCIe 4.0 x8 | Saídas: 3x DisplayPort, 1x HDMI">
                     <div class="card-image"><img src="../img/RTX4070TI.webp" alt="4060"></div>
                     <div class="card-info">
                         <h3>RTX 4060 Ti 16gb</h3>
                         <p class="price">R$3.065,90</p>
-                       <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card" data-desc="A nova geração de entrada com a arquitetura mais recente da Nvidia. Eficiência energética absurda combinada com tecnologias de inteligência artificial de última linha." data-specs="Memória VRAM: 8GB GDDR6X | Interface: 128-bit | Suporte Ray Tracing: Núcleos RT de 4ª Geração | Arquitetura: Blackwell">
                     <div class="card-image"><img src="../img/RTX5060.webp" alt="5060"></div>
                     <div class="card-info">
                         <h3>RTX 5060 8gb</h3>
                         <p class="price">R$2.765,90</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/RTX3060.webp" alt=""></div>
-                    <div class="card-info">
-                        <h3>RTX 3060 8gb</h3>
-                        <p class="price">R$1.998,88</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
+            </div>
         </section>
 
         <section class="content-section section-amdR">
             <h2>GPUs AMD Radeon</h2>
-                <div class="card-grid">
-                    <div class="card">
+            <div class="card-grid">
+                <div class="card" data-desc="Excelente desempenho bruto para rasterização pura. Um monstro para jogos competitivos como CS2, Valorant e Warzone com baixíssima latência." data-specs="Memória VRAM: 8GB GDDR6 | Interface: 128-bit | Arquitetura: RDNA 2 | Tecnologias: AMD FSR 3 e Fluid Motion Frames">
                     <div class="card-image"><img src="../img/RX6650xt.webp" alt="6650"></div>
                     <div class="card-info">
                         <h3>AMD Radeon RX 6650 xt 8gb</h3>
                         <p class="price">R$2,300.00</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
+                        <button class="btn-buy">Ver Detalhes</button>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/RX7600xt.png" alt="7600xt"></div>
-                    <div class="card-info">
-                        <h3>AMD Radeon RX 7600 xt 16gb</h3>
-                        <p class="price">R$2,980.00</p>
-                        <a href="../html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-image"><img src="../img/RX7800xt.png" alt="7800"></div>
-                    <div class="card-info">
-                        <h3>AMD Radeon RX 7800 xt 16gb</h3>
-                        <p class="price">R$4,747.00</p>
-                        <a href="/html/carrinho.html"><button class="btn-buy">Comprar</button></a>
-                    </div>
-                </div>
-            </section>
+            </div>
+        </section>
     </main>
 
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-left">
+                    <img id="modalProductImg" src="" alt="Imagem do Produto">
+                </div>
+                <div class="modal-right">
+                    <h2 id="modalProductName">Nome do Produto</h2>
+                    <p id="modalProductPrice" class="modal-price">R$ 0,00</p>
+                    <div class="modal-divider"></div>
+                    <h3>Descrição</h3>
+                    <p id="modalProductDesc">Descrição do produto...</p>
+                    <h3>Especificações Técnicas</h3>
+                    <p id="modalProductSpecs" class="modal-specs">Especificações aqui...</p>
+                    <a id="modalRedirectBtn" href="../html/carrinho.html"><button class="btn-confirm-buy">Adicionar ao Carrinho</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="main-footer">
-    <div class="footer-container">
-        <div class="footer-col about-col">
-            <h2>Core Match <span class="br-green">
-            <p>Comunidade de Hardware, site confiavel e perfeito para entusiastas de Hardware e Tecnologia.</p>
+        <div class="footer-container">
+            <div class="footer-col about-col">
+                <h2>Core Match</h2>
+                <p>Comunidade de Hardware, site confiável e perfeito para entusiastas de Hardware e Tecnologia.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="../html/blog.html">Blog</a></li>
+                    <li><a href="../html/outlet.html">Outlet</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Suporte</h4>
+                <ul>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Políticas de Privacidade</a></li>
+                    <li><a href="#">Email: corematch.contato@gmail.com</a></li>
+                    <li><a href="#">Insta: @core.match</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div class="footer-col">
-            <h4>Navegação</h4>
-            <ul>
-                <li><a href="../html/blog.html">Blog</a></li>
-                <li><a href="../html/outlet.html">Outlet</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Core Match. Todos os direitos reservados.</p>
         </div>
+    </footer>
 
-        <div class="footer-col">
-            <h4>Suporte</h4>
-            <ul>
-                <li><a href="#">Termos de Uso</a></li>
-                <li><a href="#">Políticas de Privacidade</a></li>
-                <li><a href="#">FaceBook: corematch.fb</a></li>
-                <li><a href="#">Email: corematch.contato@gmail.com</a></li>
-                <li><a href="#">Telefone: (31) 9 8888-9999</a></li>
-                <li><a href="#">Insta: @core.match</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="footer-bottom">
-        <p>&copy; 2026 Core Match. Todos os direitos reservados. Para entusiastas de Hardware e Tecnologia.</p>
-    </div>
-</footer>
-
-<script src="../js/store.js"></script>
+    <script src="../js/store.js"></script>
 </body>
 </html>

@@ -231,11 +231,78 @@ body {
 .section-PLCMAE .card:hover {
     border-color: #7d00c5;
 }
+.section-memoria h2 {
+    border-left-color: #202020; 
+}
+
+
+.section-memoria .card-info h3 {
+    color: white;
+}
+
+
+.section-memoria .btn-buy {
+    border-color: #202020;
+}
+
+.section-memoria .btn-buy:hover {
+    background-color: #202020;
+    color: white;
+}
+
+.section-memoria .card:hover {
+    border-color: #202020;
+}
+
+.section-armazenamento h2 {
+    border-left-color: #97cfd6; 
+}
+
+
+.section-armazenamento .card-info h3 {
+    color: white;
+}
+
+
+.section-armazenamento .btn-buy {
+    border-color: #97cfd6;
+}
+
+.section-armazenamento .btn-buy:hover {
+    background-color: #97cfd6;
+    color: white;
+}
+
+.section-armazenamento .card:hover {
+    border-color: #97cfd6;
+}
+
+.section-gabinete h2 {
+    border-left-color: #ffffff; 
+}
+
+.section-gabinete .card-info h3 {
+    color: white;
+}
+
+
+.section-gabinete .btn-buy {
+    border-color: #ffffff;
+}
+
+.section-gabinete .btn-buy:hover {
+    background-color: #ffffff;
+    color: white;
+}
+
+.section-gabinete .card:hover {
+    border-color: #ffffff;
+}
+
 
 .section-perifericos h2 {
     border-left-color: #868686; 
 }
-
 
 .section-perifericos .card-info h3 {
     color: white;
@@ -465,10 +532,6 @@ body {
         justify-content: center;
     }
 }
-
-/* ==========================================================================
-   ESTILOS DA JANELA MODAL DO PRODUTO
-   ========================================================================== */
 
 /* Fundo desfocado e escuro cobrindo a tela inteira */
 .modal {

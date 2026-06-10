@@ -96,3 +96,343 @@ body {
     text-transform: uppercase;
     font-size: 1.5rem;
 }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 10px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   ESTILOS DO PAINEL DO USUÁRIO (SISTEMA DE ABAS EM SEGUNDO PLANO)
+   ========================================================================== */
+
+/* Configuração do Layout Geral (Grid Lateral + Centro) */
+.profile-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    align-items: start;
+    margin-top: 40px;
+}
+
+/* Menu Lateral */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Transformando os links antigos em botões nativos de abas */
+.menu-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid #252525;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.menu-item:hover, .menu-item.active {
+    border-color: var(--petronas-turq);
+    background-color: #222;
+}
+
+.menu-item.active .item-icon {
+    text-shadow: 0 0 10px var(--petronas-turq);
+}
+
+.item-icon {
+    font-size: 1.8rem;
+    color: var(--petronas-turq);
+    margin-right: 20px;
+    width: 35px;
+    text-align: center;
+}
+
+.item-text h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.item-text p {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* CONTROLE DE EXIBIÇÃO DE ABAS (O segredo do segundo plano) */
+.tab-content {
+    display: none; /* Esconde todas por padrão */
+}
+
+.tab-content.active {
+    display: block; /* Mostra apenas a que tiver a classe .active */
+}
+
+/* Cards e Estruturas de Conteúdo */
+.profile-card {
+    background-color: var(--card-bg);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid #252525;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    color: white;
+    border-bottom: 2px solid #252525;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--petronas-turq);
+}
+
+/* Card de Boas-Vindas */
+.user-welcome-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar-box {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background-color: #111;
+    border: 2px solid var(--petronas-turq);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--petronas-turq);
+}
+
+.user-welcome-info h2 {
+    font-size: 1.5rem;
+}
+
+.user-welcome-info p {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* Sub-grade interna (Dashboard) */
+.inner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.left-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.row-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.target-icon {
+    font-size: 1.8rem;
+    color: var(--petronas-turq);
+}
+
+.card-inner-text h3 {
+    font-size: 1.15rem;
+}
+
+.arrow-link {
+    font-size: 0.8rem;
+    color: var(--petronas-turq);
+    text-decoration: none;
+}
+
+.notification-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 30px;
+}
+
+.notification-icon {
+    font-size: 2.2rem;
+    color: #333;
+}
+
+.notification-card h3 {
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Card de Entregas/Produtos */
+.shipping-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.shipping-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.truck-icon {
+    color: var(--petronas-turq);
+    font-size: 1.5rem;
+}
+
+.product-preview {
+    text-align: center;
+    margin: auto 0;
+    padding: 20px 0;
+}
+
+.product-img-placeholder {
+    width: 90px;
+    height: 90px;
+    background-color: #111;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    color: var(--petronas-turq);
+    margin: 0 auto 15px auto;
+}
+
+.serial-number {
+    font-size: 0.75rem;
+    color: #666;
+}
+
+/* Gerenciamento de Listas (Carrinho e Histórico) */
+.cart-item-row, .order-history-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #222;
+}
+
+.item-product-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.item-thumb {
+    width: 50px;
+    height: 50px;
+    background-color: #111;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--petronas-turq);
+    font-size: 1.3rem;
+}
+
+.item-price {
+    color: var(--petronas-turq);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+/* Botões de Ação do Sistema */
+.btn-checkout {
+    background-color: var(--petronas-turq);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-checkout:hover {
+    background-color: #00c2ba;
+}
+
+.btn-confirm-delivery {
+    background-color: transparent;
+    border: 1px solid var(--petronas-turq);
+    color: var(--petronas-turq);
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+}
+
+.btn-confirm-delivery:hover {
+    background-color: var(--petronas-turq);
+    color: white;
+}
+
+/* Badges de Status do Pedido */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.status-badge.warning {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    border: 1px solid #ffc107;
+}
+
+.status-badge.success {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.empty-message {
+    color: #555;
+    text-align: center;
+    padding: 30px 0;
+}
+
+.data-form p {
+    margin-bottom: 12px;
+    font-size: 1rem;
+}
+
+/* Responsividade simples */
+@media (max-width: 992px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+    .inner-grid {
+        grid-template-columns: 1fr;
+    }
+}

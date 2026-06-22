@@ -112,11 +112,6 @@ body {
     transition: all 0.3s ease;
 }
 
-/* ==========================================================================
-   ESTILOS DO PAINEL DO USUÁRIO (SISTEMA DE ABAS EM SEGUNDO PLANO)
-   ========================================================================== */
-
-/* Configuração do Layout Geral (Grid Lateral + Centro) */
 .profile-layout {
     display: grid;
     grid-template-columns: 320px 1fr;
@@ -125,14 +120,12 @@ body {
     margin-top: 40px;
 }
 
-/* Menu Lateral */
+
 .sidebar-menu {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-
-/* Transformando os links antigos em botões nativos de abas */
 .menu-item {
     display: flex;
     align-items: center;
@@ -152,9 +145,7 @@ body {
     background-color: #222;
 }
 
-.menu-item.active .item-icon {
-    text-shadow: 0 0 10px var(--petronas-turq);
-}
+
 
 .item-icon {
     font-size: 1.8rem;
@@ -174,16 +165,16 @@ body {
     color: #888;
 }
 
-/* CONTROLE DE EXIBIÇÃO DE ABAS (O segredo do segundo plano) */
+
 .tab-content {
-    display: none; /* Esconde todas por padrão */
+    display: none; 
 }
 
 .tab-content.active {
-    display: block; /* Mostra apenas a que tiver a classe .active */
+    display: block; 
 }
 
-/* Cards e Estruturas de Conteúdo */
+
 .profile-card {
     background-color: var(--card-bg);
     border-radius: 16px;
@@ -206,7 +197,7 @@ body {
     color: var(--petronas-turq);
 }
 
-/* Card de Boas-Vindas */
+
 .user-welcome-card {
     display: flex;
     align-items: center;
@@ -235,7 +226,7 @@ body {
     font-size: 0.9rem;
 }
 
-/* Sub-grade interna (Dashboard) */
+
 .inner-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -289,7 +280,7 @@ body {
     color: #777;
 }
 
-/* Card de Entregas/Produtos */
+
 .shipping-card {
     display: flex;
     flex-direction: column;
@@ -331,7 +322,7 @@ body {
     color: #666;
 }
 
-/* Gerenciamento de Listas (Carrinho e Histórico) */
+
 .cart-item-row, .order-history-row {
     display: flex;
     justify-content: space-between;
@@ -363,8 +354,45 @@ body {
     font-size: 0.9rem;
     font-weight: bold;
 }
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
 
-/* Botões de Ação do Sistema */
+.auth-buttons a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+
+.btn-login {
+    color: var(--mercedes-silver);
+    display: flex;
+    align-items: center;
+}
+
+.btn-login:hover {
+    color: var(--petronas-turq);
+    text-shadow: 0 0 8px var(--petronas-turq);
+}
+
+.btn-register {
+    background-color: transparent;
+    color: var(--petronas-turq);
+    border: 1px solid var(--petronas-turq);
+    box-shadow: inset 0 0 0 0 var(--petronas-turq);
+}
+
+.btn-register:hover {
+    background-color: var(--petronas-turq);
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 161, 155, 0.5);
+}
+
 .btn-checkout {
     background-color: var(--petronas-turq);
     color: white;
@@ -396,7 +424,7 @@ body {
     color: white;
 }
 
-/* Badges de Status do Pedido */
+
 .status-badge {
     padding: 5px 12px;
     border-radius: 20px;
@@ -427,7 +455,7 @@ body {
     font-size: 1rem;
 }
 
-/* Responsividade simples */
+
 @media (max-width: 992px) {
     .profile-layout {
         grid-template-columns: 1fr;

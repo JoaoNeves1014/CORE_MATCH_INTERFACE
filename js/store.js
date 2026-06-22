@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (estaLogado === "true") {
             // Esconde os botões alterando o display para 'none'
             authButtons.style.display = "none";
-            
-            // (Opcional) Se quiser mostrar um botão de "Sair" (Logout), você pode injetar aqui:
-            // const navbar = document.querySelector('.navbar'); // ou onde desejar
-            // navbar.insertAdjacentHTML('beforeend', '<button onclick="logout()">Sair</button>');
         }
     
     // Função caso você queira permitir o usuário deslogar depois
@@ -45,16 +41,15 @@ document.addEventListener("DOMContentLoaded", () => {
             // Guarda a referência do card clicado para usar depois no botão do carrinho
             cardAtivo = card;
 
-            // Coleta os dados básicos do card
+            
             const titulo = card.querySelector("h3").innerText;
             const imagem = card.querySelector(".card-image img").getAttribute("src");
             const precoTexto = card.querySelector(".price").innerText;
             
-            // Coleta as especificações extras dos atributos data-* do HTML
+          
             const productDesc = card.getAttribute("data-desc") || "Descrição detalhada em breve.";
             const productSpecs = card.getAttribute("data-specs") || "Especificações técnicas não informadas.";
 
-            // Injeta os dados na modal para o usuário ler
             modalImg.src = imagem;
             modalImg.alt = titulo;
             modalName.innerText = titulo;
@@ -62,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
             modalDesc.innerText = productDesc;
             modalSpecs.innerText = productSpecs;
 
-            // Abre a modal suavemente respeitando o CSS (display + transition)
+
             modal.style.display = "flex";
             setTimeout(() => {
                 modal.classList.add("show");
@@ -70,15 +65,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. Lógica do botão de confirmação DENTRO da modal (Ir para o carrinho)
+ 
     if (modalRedirectBtn) {
         modalRedirectBtn.addEventListener("click", (event) => {
-            // Evita o redirecionamento imediato para rodar a sua lógica de negócio antes
+
             event.preventDefault();
 
             if (!cardAtivo) return;
 
-            // Executa a sua lógica exata de tratamento de dados usando o card ativo
+         
             const titulo = cardAtivo.querySelector("h3").innerText;
             const imagem = cardAtivo.querySelector(".card-image img").getAttribute("src");
             let precoTexto = cardAtivo.querySelector(".price").innerText;
@@ -86,7 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Limpa o preço para formato numérico puro
             let precoLimpo = parseFloat(precoTexto.replace("R$", "").replace(".", "").replace(",", ".").trim());
 
-            // Cria o objeto do produto com o ID temporário e o desconto do PIX (~13.5% off)
             const produtoParaCarrinho = {
                 id: Math.random().toString(36).substr(2, 9), 
                 nome: titulo,

@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.stopPropagation();
 
             // Sobe até o card pai para coletar os dados
-            cardAtivo = botao.closest(".card");
+            cardAtivo = botao.closest(".card");''
             if (!cardAtivo) return;
 
             const titulo = cardAtivo.querySelector("h3").innerText;

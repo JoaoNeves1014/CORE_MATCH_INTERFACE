@@ -50,6 +50,9 @@ function switchTab(tabId) {
 
     // Função 2: Conectar o fluxo do Carrinho para Minhas Compras
     function checkoutProduct(productName, elementId) {
+
+    let itensDoCarrinhoNoPerfil = JSON.parse(localStorage.getItem("itensNoCarrinho")) || [];
+
         // 1. Remove o item visualmente do carrinho
         const productElement = document.getElementById(elementId);
         if (productElement) {
@@ -102,8 +105,11 @@ function switchTab(tabId) {
         // Abre a aba "Minhas Compras" automaticamente para dar o feedback ao usuário
         alert(`Sucesso! Compra do ${productName} finalizada com sucesso! Verifique o status em 'Minhas Compras'.`);
         switchTab('compras');
-    }
+    }   
 
+
+    let historicoDeCompras = JSON.parse(localStorage.getItem("minhasCompras")) || [];
+// Mapeie esses itens exibindo o código do rastreamento (item.codigoPedido) e a data (item.dataCompra)
     // Função Bônus: Mover de "Minhas Compras" para "Compras Finalizadas" ao receber o produto
     function confirmDelivery(productName, orderId) {
         // Remove das compras em andamento

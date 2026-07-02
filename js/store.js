@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    // 1. Elementos da Janela Modal
+    // Elementos da Janela Modal
     const modal = document.getElementById("productModal");
     const closeModalBtn = document.querySelector(".close-modal");
     
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Variável para guardar o card que está ativo no momento
     let cardAtivo = null;
 
-    // 2. Captura todos os cards de produtos para abrir a modal
+    //Captura todos os cards de produtos para abrir a modal
     const productCards = document.querySelectorAll(".card");
 
     productCards.forEach(card => {
@@ -117,4 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
             closeModal();
         }
     });
+    let carrinho = JSON.parse(localStorage.getItem("itensNoCarrinho")) || [];
+// Verifique se o item já existe para apenas aumentar a quantidade, se não existia faça carrinho.push(novoProduto)
+localStorage.setItem("itensNoCarrinho", JSON.stringify(carrinho));
 });

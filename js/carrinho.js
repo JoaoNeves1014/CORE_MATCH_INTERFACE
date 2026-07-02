@@ -1,25 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
     const authButtons = document.querySelector(".auth-buttons");
-        
-        // Verifica se existe a marcação de login no localStorage
-        const estaLogado = localStorage.getItem("usuarioLogado");
-
-        if (estaLogado === "true") {
-            // Esconde os botões alterando o display para 'none'
-            authButtons.style.display = "none";
-            
-            // (Opcional) Se quiser mostrar um botão de "Sair" (Logout), você pode injetar aqui:
-            // const navbar = document.querySelector('.navbar'); // ou onde desejar
-            // navbar.insertAdjacentHTML('beforeend', '<button onclick="logout()">Sair</button>');
-        }
     
-    // Função caso você queira permitir o usuário deslogar depois
-    function logout() {
-        localStorage.removeItem("usuarioLogado");
-        window.location.reload(); // Recarrega a página para atualizar os botões
+    // Verifica se existe a marcação de login no localStorage
+    const estaLogado = localStorage.getItem("usuarioLogado");
+
+    if (estaLogado === "true" && authButtons) {
+        authButtons.style.display = "none";
     }
-
-
 
     const container = document.getElementById("container-produtos-carrinho");
     
@@ -28,17 +15,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const txtTotal = document.getElementById("resumo-total");
     const txtPix = document.getElementById("resumo-pix");
     const txtEconomia = document.getElementById("resumo-economia");
+    const btnFinalizar = document.querySelector(".btn-finish");
 
-    // Puxa o produto vindo do "banco de dados" local (unificado para todas as páginas)
-    const produto = JSON.parse(localStorage.getItem("itemCarrinho"));
+    // Lendo como LISTA unificada para o site inteiro e para a tela de Perfil
+    let listaProdutos = JSON.parse(localStorage.getItem("itensNoCarrinho")) || [];
 
-    // Se não houver produto salvo, avisa que o carrinho está vazio
-    if (!produto) {
+    // Se houver algum resquício do modelo antigo de item único, converte para array de forma segura
+    const itemAntigo = localStorage.getItem("itemCarrinho");
+    if (itemAntigo) {
+        try {
+            const parsedAntigo = JSON.parse(itemAntigo);
+            if (parsedAntigo && !Array.isArray(parsedAntigo)) {
+                listaProdutos.push(parsedAntigo);
+                localStorage.setItem("itensNoCarrinho", JSON.stringify(listaProdutos));
+            }
+        } catch(e) {}
+        localStorage.removeItem("itemCarrinho"); // Deleta a chave antiga para limpar o escopo
+    }
+
+    // Se não houver produtos salvos na lista, avisa que o carrinho está vazio
+    if (listaProdutos.length === 0) {
+        exibirCarrinhoVazio();
+        return;
+    }
+
+    function exibirCarrinhoVazio() {
         if (container) {
             container.innerHTML = "<p style='color: white; padding: 20px;'>Seu carrinho está vazio.</p>";
         }
         zerarResumo();
-        return;
     }
 
     // Função para formatar números em formato de moeda real (R$)
@@ -54,10 +59,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if(txtEconomia) txtEconomia.innerText = formatarMoeda(0);
     }
 
-    // Executa as contas matemáticas baseadas na quantidade selecionada
+    // Executa as contas matemáticas baseadas em todos os itens da lista
     function atualizarResumoFinanceiro() {
-        const totalCartao = produto.precoCard * produto.quantidade;
-        const totalPix = produto.precoPix * produto.quantidade;
+        let totalCartao = 0;
+        let totalPix = 0;
+
+        listaProdutos.forEach(item => {
+            totalCartao += (item.precoCard || 0) * (item.quantidade || 1);
+            totalPix += (item.precoPix || 0) * (item.quantidade || 1);
+        });
+
         const economia = totalCartao - totalPix;
 
         if (txtSubtotal) txtSubtotal.innerText = formatarMoeda(totalCartao);
@@ -66,76 +77,158 @@ document.addEventListener("DOMContentLoaded", () => {
         if (txtEconomia) txtEconomia.innerText = formatarMoeda(economia);
     }
 
-    // Adiciona escuta de cliques nos botões de + , - e remover gerados dinamicamente
+    // Adiciona escuta de cliques usando seletores de classe e data-index para múltiplos itens
     function adicionarEventosBotoes() {
-        const btnMais = document.getElementById("qtd-mais");
-        const btnMenos = document.getElementById("qtd-menos");
-        const btnRemover = document.getElementById("btn-remover-item");
-
-        if (btnMais) {
-            btnMais.addEventListener("click", () => {
-                produto.quantidade++;
+        document.querySelectorAll(".qtd-mais").forEach(botao => {
+            botao.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                listaProdutos[index].quantidade++;
                 salvarERecarregar();
             });
-        }
+        });
 
-        if (btnMenos) {
-            btnMenos.addEventListener("click", () => {
-                if (produto.quantidade > 1) {
-                    produto.quantidade--;
+        document.querySelectorAll(".qtd-menos").forEach(botao => {
+            botao.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                if (listaProdutos[index].quantidade > 1) {
+                    listaProdutos[index].quantidade--;
                     salvarERecarregar();
                 }
             });
-        }
+        });
 
-        if (btnRemover) {
-            btnRemover.addEventListener("click", () => {
-                localStorage.removeItem("itemCarrinho");
-                window.location.reload();
+        document.querySelectorAll(".btn-remover-item").forEach(botao => {
+            botao.addEventListener("click", (e) => {
+                const index = e.target.getAttribute("data-index");
+                listaProdutos.splice(index, 1); // Remove do array pelo índice
+                salvarERecarregar();
             });
-        }
+        });
     }
 
     function salvarERecarregar() {
-        localStorage.setItem("itemCarrinho", JSON.stringify(produto));
-        renderizarCarrinho();
+        localStorage.setItem("itensNoCarrinho", JSON.stringify(listaProdutos));
+        if (listaProdutos.length === 0) {
+            exibirCarrinhoVazio();
+        } else {
+            renderizarCarrinho();
+        }
     }
 
-    // Função interna para renderizar o layout do item na tela
+    // Renderiza dinamicamente a pilha de itens na tela
     function renderizarCarrinho() {
         if (!container) return;
+        container.innerHTML = "";
 
-        container.innerHTML = `
-            <div class="carrinho-item" style="display: flex; align-items: center; background: #111; padding: 15px; margin-bottom: 15px; border-radius: 8px; justify-content: space-between;">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <img src="${produto.imagem}" alt="${produto.nome}" style="width: 80px; height: 80px; object-fit: contain;">
-                    <div>
-                        <h3 style="color: white; margin: 0; font-size: 16px;">${produto.nome}</h3>
-                        <p style="color: #666; margin: 5px 0; font-size: 13px;">CÓD: ${produto.id.toUpperCase()}</p>
-                        <button id="btn-remover-item" style="color: #ff4d4d; background: none; border: none; cursor: pointer; padding: 0; font-weight: bold; font-size: 12px;">REMOVER</button>
-                    </div>
-                </div>
-                
-                <div style="display: flex; align-items: center; gap: 20px;">
-                    <div class="qtd-control" style="background: #222; border-radius: 4px; display: flex; align-items: center; border: 1px solid #333;">
-                        <button id="qtd-menos" style="background: none; border: none; color: #00A19B; padding: 8px 12px; cursor: pointer; font-weight: bold;">-</button>
-                        <span id="qtd-valor" style="color: white; padding: 0 5px; font-family: monospace;">${produto.quantidade}</span>
-                        <button id="qtd-mais" style="background: none; border: none; color: #00A19B; padding: 8px 12px; cursor: pointer; font-weight: bold;">+</button>
+        listaProdutos.forEach((item, index) => {
+            container.innerHTML += `
+                <div class="carrinho-item" style="display: flex; align-items: center; background: #111; padding: 15px; margin-bottom: 15px; border-radius: 8px; justify-content: space-between; border: 1px solid #222;">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <img src="${item.imagem}" alt="${item.nome}" style="width: 80px; height: 80px; object-fit: contain;">
+                        <div>
+                            <h3 style="color: white; margin: 0; font-size: 16px;">${item.nome}</h3>
+                            <p style="color: #666; margin: 5px 0; font-size: 13px;">CÓD: ${item.id ? item.id.toUpperCase() : 'HW'}</p>
+                            <button class="btn-remover-item" data-index="${index}" style="color: #ff4d4d; background: none; border: none; cursor: pointer; padding: 0; font-weight: bold; font-size: 12px;">REMOVER</button>
+                        </div>
                     </div>
                     
-                    <div style="text-align: right; min-width: 150px;">
-                        <span style="color: #888; display: block; font-size: 11px;">À vista no PIX</span>
-                        <strong style="color: #00A19B; font-size: 18px; display: block;">${formatarMoeda(produto.precoPix * produto.quantidade)}</strong>
-                        <span style="color: #666; display: block; font-size: 11px;">ou ${formatarMoeda(produto.precoCard * produto.quantidade)} no cartão</span>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <div class="qtd-control" style="background: #222; border-radius: 4px; display: flex; align-items: center; border: 1px solid #333;">
+                            <button class="qtd-menos" data-index="${index}" style="background: none; border: none; color: #00A19B; padding: 8px 12px; cursor: pointer; font-weight: bold;">-</button>
+                            <span style="color: white; padding: 0 5px; font-family: monospace;">${item.quantidade}</span>
+                            <button class="qtd-mais" data-index="${index}" style="background: none; border: none; color: #00A19B; padding: 8px 12px; cursor: pointer; font-weight: bold;">+</button>
+                        </div>
+                        
+                        <div style="text-align: right; min-width: 150px;">
+                            <span style="color: #888; display: block; font-size: 11px;">À vista no PIX</span>
+                            <strong style="color: #00A19B; font-size: 18px; display: block;">${formatarMoeda((item.precoPix || 0) * item.quantidade)}</strong>
+                            <span style="color: #666; display: block; font-size: 11px;">ou ${formatarMoeda((item.precoCard || 0) * item.quantidade)} no cartão</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
 
         atualizarResumoFinanceiro();
         adicionarEventosBotoes();
     }
 
-    // Inicializa a página carregando o produto correto
+    // --- INTERFACE DE FINALIZAÇÃO E PAGAMENTO EM SEGUNDO PLANO ---
+    if (btnFinalizar) {
+        btnFinalizar.addEventListener("click", () => {
+            if (listaProdutos.length === 0) return;
+
+            // Calcula o total dinâmico do Pix para exibir na janela modal de pagamento
+            let valorTotalPix = 0;
+            listaProdutos.forEach(item => valorTotalPix += (item.precoPix || 0) * item.quantidade);
+
+            // Injeta a estrutura de checkout em segundo plano de forma dinâmica (Modal Overlap)
+            const painelPagamento = document.createElement("div");
+            painelPagamento.id = "checkout-background-modal";
+            painelPagamento.style = "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px);";
+            
+            painelPagamento.innerHTML = `
+                <div style="background: #111; border: 2px solid #00A19B; padding: 30px; border-radius: 12px; width: 90%; max-width: 445px; text-align: center; color: white; box-shadow: 0px 0px 25px rgba(0, 161, 155, 0.25);">
+                    <h2 style="color: #00A19B; margin-top: 0; font-size: 22px;">Finalizar Compra</h2>
+                    <p style="color: #888; font-size: 14px; margin-bottom: 20px;">Escolha o método de pagamento para concluir seu pedido em segundo plano:</p>
+                    
+                    <div style="background: #161616; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #252525;">
+                        <span style="color: #666; font-size: 13px; display: block;">Total Geral:</span>
+                        <strong style="font-size: 24px; color: #fff;">${formatarMoeda(valorTotalPix)}</strong>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <button id="checkout-confirmar-pix" style="background: #00A19B; color: black; border: none; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 15px;">Pagar no PIX (Desconto Aplicado)</button>
+                        <button id="checkout-confirmar-cartao" style="background: #222; color: white; border: 1px solid #444; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 15px;">Pagar no Cartão de Crédito</button>
+                        <button id="checkout-fechar" style="background: none; color: #ff4d4d; border: none; margin-top: 10px; cursor: pointer; font-size: 13px; font-weight: bold;">Cancelar e voltar</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(painelPagamento);
+
+            // Ação de fechar/cancelar o checkout
+            document.getElementById("checkout-fechar").addEventListener("click", () => {
+                painelPagamento.remove();
+            });
+
+            // Função que executa a transferência entre banco de dados locais
+            const dispararPagamentoBemSucedido = () => {
+                // Captura o array de histórico do usuário ou inicia um novo
+                let minhasCompras = JSON.parse(localStorage.getItem("minhasCompras")) || [];
+
+                // Transfere cada item adicionando as propriedades de Nota/Pedido e Data
+                listaProdutos.forEach(item => {
+                    item.codigoPedido = "CM-" + Math.floor(100000 + Math.random() * 900000);
+                    item.dataCompra = new Date().toLocaleDateString("pt-BR");
+                    minhasCompras.push(item);
+                });
+
+                // Envia para o histórico de Compras e Limpa o Carrinho completamente
+                localStorage.setItem("minhasCompras", JSON.stringify(minhasCompras));
+                localStorage.removeItem("itensNoCarrinho");
+
+                // Atualiza a visualização interna do modal para indicar sucesso
+                painelPagamento.innerHTML = `
+                    <div style="background: #111; border: 2px solid #00A19B; padding: 35px; border-radius: 12px; width: 90%; max-width: 420px; text-align: center; color: white;">
+                        <span style="font-size: 45px; display: block; margin-bottom: 10px;">✔</span>
+                        <h2 style="color: #00A19B; margin: 0 0 10px 0;">Pagamento Aprovado!</h2>
+                        <p style="color: #aaa; font-size: 14px; margin-bottom: 20px;">O pedido foi processado. Seus itens foram movidos para a aba <strong>Minhas Compras</strong> do seu Perfil.</p>
+                        <button id="checkout-ir-perfil" style="background: #00A19B; color: black; border: none; padding: 12px 24px; font-weight: bold; border-radius: 4px; cursor: pointer; font-size: 14px;">Acessar Meu Perfil</button>
+                    </div>
+                `;
+
+                document.getElementById("checkout-ir-perfil").addEventListener("click", () => {
+                    painelPagamento.remove();
+                    window.location.href = "../html/perfil.html";
+                });
+            };
+
+            document.getElementById("checkout-confirmar-pix").addEventListener("click", dispararPagamentoBemSucedido);
+            document.getElementById("checkout-confirmar-cartao").addEventListener("click", dispararPagamentoBemSucedido);
+        });
+    }
+
+    // Inicializa a página carregando os produtos corretos
     renderizarCarrinho();
 });
